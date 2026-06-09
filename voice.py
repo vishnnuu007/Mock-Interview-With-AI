@@ -1,6 +1,7 @@
 import google.generativeai as genai
 from flask import Flask, request, render_template, jsonify
 import pymysql
+import os
 from difflib import SequenceMatcher
 
 app = Flask(__name__)
@@ -10,8 +11,7 @@ db = pymysql.connect(host='localhost', user='root', password='', db='mockintervi
 cursor = db.cursor()
 
 # Google Gemini API Key
-# GOOGLE_API_KEY = 'AIzaSyDlMaJczPeBl0_Wakkb7LRN_wYqs4z12P4'
-GOOGLE_API_KEY = 'AIzaSyDlMaJczPeBl0_Wakkb7LRN_wYqs4z12P4'
+GOOGLE_API_KEY = os.getenv("GOOGLE_API_KEY")
 
 
 
