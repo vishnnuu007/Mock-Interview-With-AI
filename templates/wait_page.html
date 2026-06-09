@@ -1,0 +1,17 @@
+{% include 'user_header.html' %}
+
+<center>
+   
+   
+        <h1>Please wait for the generation to complete...</h1>
+        <script>
+            setTimeout(function() {
+                window.location.href = '/check_generation_status';
+            }, 5000); // Check every 5 seconds
+        </script>
+ 
+    
+</center>
+   
+    {% include 'footer.html' %}
+

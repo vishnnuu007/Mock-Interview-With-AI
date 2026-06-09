@@ -1,0 +1,64 @@
+
+
+    {% include 'admin_header.html' %}
+
+<style>
+    /* Add a background image and apply a blur effect */
+    body {
+        background-image: url('/static/b03df4f90386cc64c3b810054d43016e.jpg'); /* Replace with your image path */
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+        margin: 0;
+        padding: 0;
+    }
+
+    /* Create a blur overlay */
+    .blur-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        backdrop-filter: blur(10px); /* Adjust the blur intensity */
+        z-index: -1; /* Ensure it stays behind the content */
+    }
+
+    /* Ensure the table and content are visible */
+    .container {
+        position: relative;
+        z-index: 1;
+        background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white background */
+        padding: 20px;
+        border-radius: 10px;
+        margin-top: 10%;
+    }
+</style>
+
+<!-- Blur overlay -->
+<div class="blur-overlay"></div>
+
+<center>
+    <div class="container">
+        <table border="2" class="table table-bordered border-primary">
+            <tr class="table-primary">
+                <th>Sender</th>
+                <th>Complaint</th>
+                <th>Date</th>
+                <th>Reply</th>
+                <th>Send Reply</th>
+            </tr>
+            {% for i in data['view'] %}
+            <tr>
+                <td>{{i['fname']}}</td>
+                <td>{{i['complaint']}}</td>
+                <td>{{i['date']}}</td>
+                <td>{{i['reply']}}</td>
+                <td><a href="/reply?id={{i['complaint_id']}}">Send Reply</a></td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+</center>
+
+{% include 'footer.html' %}

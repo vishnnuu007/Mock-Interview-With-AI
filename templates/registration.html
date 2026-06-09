@@ -1,0 +1,388 @@
+{% include 'public_header.html' %}
+
+<style>
+    /* [Your existing CSS unchanged] */
+
+    body {
+    font-family: 'Poppins', Arial, sans-serif;
+    background: url('/static/5819084e975ec9798abc578c50dfc207.jpg') no-repeat center center/cover;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    position: relative;
+}
+
+/* Add a blurred overlay for better readability */
+body::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.2); /* White semi-transparent overlay */
+    backdrop-filter: blur(10px); /* Apply blur effect */
+    z-index: -1;
+}
+
+.container {
+    position: relative;
+    max-width: 600px;
+    width: 90%;
+    background-color: rgba(255, 255, 255, 0.8); /* Slightly transparent for blending */
+    padding: 30px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    border-radius: 15px;
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+    /* body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        margin: 0;
+        padding: 0;
+    }
+
+    .container {
+        max-width: 600px;
+        margin: 5% auto;
+        background-color: #fff;
+        padding: 20px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+    } */
+
+    h1 {
+        text-align: center;
+        color: #333;
+    }
+
+    table {
+        width: 100%;
+        margin-top: 20px;
+    }
+
+    td {
+        padding: 10px;
+        font-size: 16px;
+        color: #333;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="password"],
+    input[type="file"] {
+        width: 100%;
+        padding: 8px;
+        margin: 8px 0;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
+
+    input[type="file"] {
+        padding: 5px;
+    }
+
+    .form-control {
+        font-size: 16px;
+        color: #333;
+    }
+
+    .btn-primary {
+        background-color: #007bff;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        font-size: 16px;
+        cursor: pointer;
+        width: 100%;
+    }
+
+    .btn-primary:hover {
+        background-color: #0056b3;
+    }
+
+    .error {
+        color: red;
+        font-size: 12px;
+    }
+
+    .file-upload-label {
+        font-size: 14px;
+        color: #333;
+        display: block;
+        margin-top: 10px;
+    }
+
+    .file-upload {
+        padding: 0;
+    }
+
+    .modal-overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.6);
+        justify-content: center;
+        align-items: center;
+        z-index: 1000;
+    }
+
+    .modal-content {
+        background: #fff;
+        padding: 20px;
+        border-radius: 10px;
+        text-align: center;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        max-width: 400px;
+        width: 90%;
+    }
+
+    .modal-content h2 {
+        color: #28a745;
+        margin: 0 0 10px;
+    }
+
+    .modal-content p {
+        color: #333;
+        margin: 0 0 20px;
+    }
+
+    .modal-btn {
+        background-color: #007bff;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+    }
+
+    .modal-btn:hover {
+        background-color: #0056b3;
+    }
+</style>
+
+<div class="container" style="margin-top: 100px;">
+    <h1>Registration</h1>
+    <form name="registrationForm" onsubmit="return validateForm()" method="post" enctype="multipart/form-data" >
+        <table>
+            <tr>
+                <td>First Name:</td>
+                <td><input type="text" name="fname" class="form-control" placeholder="First Name" required></td>
+            </tr>
+            <tr>
+                <td>Last Name:</td>
+                <td><input type="text" name="lname" class="form-control" placeholder="Last Name"></td>
+            </tr>
+            <tr>
+                <td>Place:</td>
+                <td><input type="text" name="place" class="form-control" placeholder="Place"></td>
+            </tr>
+            <tr>
+                <td>Phone:</td>
+                <td><input type="text" name="phone" class="form-control" placeholder="Phone" pattern="[0-9]{10}" maxlength="10" required></td>
+            </tr>
+            <tr>
+                <td>Email:</td>
+                <td><input type="email" name="email" class="form-control" placeholder="Email" required></td>
+            </tr>
+
+            <tr>
+                <td><label class="file-upload-label" for="img1">Please Upload Your Images</label></td>
+            </tr>
+
+            <tr>
+                <td>
+                    <input type="file" name="img1" id="img1" class="form-control file-upload" accept="image/*" required>
+                    <span class="error" id="img1Error"></span>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <input type="file" name="img2" id="img2" class="form-control file-upload" accept="image/*" required>
+                    <span class="error" id="img2Error"></span>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <input type="file" name="img3" id="img3" class="form-control file-upload" accept="image/*" required>
+                    <span class="error" id="img3Error"></span>
+                </td>
+            </tr>
+
+            <tr>
+                <td>User Name:</td>
+                <td><input type="text" name="uname" class="form-control" placeholder="User Name" required></td>
+            </tr>
+            <tr>
+                <td>Password:</td>
+                <td>
+                    <input type="password" name="psw" id="psw" class="form-control" placeholder="Password" required onkeyup="checkPasswordStrength()">
+                    <span class="error" id="passwordStrength"></span>
+                </td>
+            </tr>
+            <tr>
+                <td>Confirm Password:</td>
+                <td><input type="password" name="confirmPsw" class="form-control" placeholder="Confirm Password" required></td>
+            </tr>
+            <tr>
+                <td colspan="2" style="text-align: center;">
+                    <input type="submit" name="submit" value="Submit" class="btn-primary">
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>
+
+<!-- Custom Alert Modal -->
+<div class="modal-overlay" id="successModal">
+    <div class="modal-content">
+        <h2>Success!</h2>
+        <p>You have registered successfully. Check your email for credentials.</p>
+        <button class="modal-btn" onclick="closeModalAndRedirect()">OK</button>
+    </div>
+</div>
+
+<script>
+    function validateForm() {
+        var fname = document.registrationForm.fname.value.trim();
+        var lname = document.registrationForm.lname.value.trim();
+        var place = document.registrationForm.place.value.trim();
+        var phone = document.registrationForm.phone.value.trim();
+        var email = document.registrationForm.email.value.trim();
+        var uname = document.registrationForm.uname.value.trim();
+        var psw = document.registrationForm.psw.value;
+        var confirmPsw = document.registrationForm.confirmPsw.value;
+        var img1 = document.registrationForm.img1.files[0];
+        var img2 = document.registrationForm.img2.files[0];
+        var img3 = document.registrationForm.img3.files[0];
+
+        if (!fname || !/^[a-zA-Z\s-]{2,}$/.test(fname)) {
+            alert("First Name must be at least 2 characters and contain only letters, spaces, or hyphens");
+            return false;
+        }
+
+        if (lname && !/^[a-zA-Z\s-]{2,}$/.test(lname)) {
+            alert("Last Name must be at least 2 characters and contain only letters, spaces, or hyphens");
+            return false;
+        }
+
+        if (place && !/^[a-zA-Z\s-]{3,}$/.test(place)) {
+            alert("Place must be at least 3 characters and contain only letters, spaces, or hyphens");
+            return false;
+        }
+
+        if (!phone || !/^\d{10}$/.test(phone)) {
+            alert("Phone number must be exactly 10 digits");
+            return false;
+        }
+
+        var emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+        if (!email || !emailPattern.test(email)) {
+            alert("Please enter a valid email address (e.g., user@example.com)");
+            return false;
+        }
+
+        const maxFileSize = 5 * 1024 * 1024; // 5MB
+        const validImageTypes = ['image/jpeg', 'image/png', 'image/gif'];
+        
+        if (!img1 || !validImageTypes.includes(img1.type) || img1.size > maxFileSize) {
+            document.getElementById("img1Error").textContent = "Must be JPEG, PNG, or GIF under 5MB";
+            return false;
+        }
+        if (!img2 || !validImageTypes.includes(img2.type) || img2.size > maxFileSize) {
+            document.getElementById("img2Error").textContent = "Must be JPEG, PNG, or GIF under 5MB";
+            return false;
+        }
+        if (!img3 || !validImageTypes.includes(img3.type) || img3.size > maxFileSize) {
+            document.getElementById("img3Error").textContent = "Must be JPEG, PNG, or GIF under 5MB";
+            return false;
+        }
+
+        if (!uname || !/^[a-zA-Z0-9_-]{4,}$/.test(uname)) {
+            alert("User Name must be at least 4 characters and contain only letters, numbers, underscores, or hyphens");
+            return false;
+        }
+
+        var passwordStrength = checkPasswordStrength(true);
+        if (!psw) {
+            alert("Password must be filled out");
+            return false;
+        }
+        if (passwordStrength !== "strong") {
+            alert("Password must be strong: at least 8 characters, including uppercase, lowercase, numbers, and special characters");
+            return false;
+        }
+
+        if (!confirmPsw) {
+            alert("Please confirm your password");
+            return false;
+        }
+        if (psw !== confirmPsw) {
+            alert("Passwords do not match");
+            return false;
+        }
+
+        return true;
+    }
+
+    function checkPasswordStrength(silent = false) {
+        var psw = document.getElementById("psw").value;
+        var strengthSpan = document.getElementById("passwordStrength");
+        
+        if (!psw) {
+            strengthSpan.textContent = "";
+            return "none";
+        }
+
+        var hasUpperCase = /[A-Z]/.test(psw);
+        var hasLowerCase = /[a-z]/.test(psw);
+        var hasNumbers = /\d/.test(psw);
+        var hasSpecial = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/.test(psw);
+        var lengthCheck = psw.length >= 8;
+
+        if (!silent) {
+            if (lengthCheck && hasUpperCase && hasLowerCase && hasNumbers && hasSpecial) {
+                strengthSpan.textContent = "Strong";
+            } else if (lengthCheck && (hasUpperCase || hasLowerCase) && hasNumbers) {
+                strengthSpan.textContent = "Medium";
+            } else {
+                strengthSpan.textContent = "Weak";
+            }
+        }
+
+        if (lengthCheck && hasUpperCase && hasLowerCase && hasNumbers && hasSpecial) {
+            return "strong";
+        } else if (lengthCheck && (hasUpperCase || hasLowerCase) && hasNumbers) {
+            return "medium";
+        } else {
+            return "weak";
+        }
+    }
+
+    {% if success %}
+        document.getElementById("successModal").style.display = "flex";
+    {% endif %}
+
+    function closeModalAndRedirect() {
+        document.getElementById("successModal").style.display = "none";
+        window.location.href = "{{ login_url }}";
+    }
+</script>
+
+<!-- {% include 'footer.html' %} -->
+
+
+
+
+

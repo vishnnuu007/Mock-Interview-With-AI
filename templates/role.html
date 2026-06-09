@@ -1,0 +1,121 @@
+{% include 'admin_header.html' %}
+<style>
+    body {
+        background: url('/static/5819084e975ec9798abc578c50dfc207.jpg') no-repeat center center fixed;
+        background-size: cover;
+    }
+    .blur-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        backdrop-filter: blur(10px);
+        z-index: -1;
+    }
+    .card {
+        backdrop-filter: blur(5px);
+        background: rgba(255, 255, 255, 0.2);
+        transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    }
+    .card:hover {
+        transform: scale(1.05);
+        box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.3);
+    }
+    .role-container {
+        text-align: center;
+        background: rgba(255, 255, 255, 0.2);
+        padding: 20px;
+        border-radius: 10px;
+        backdrop-filter: blur(10px);
+        display: inline-block;
+    }
+    .role-title {
+        font-size: 2rem;
+        font-weight: bold;
+        color: #333;
+        margin-bottom: 15px;
+    }
+    .role-form {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+    }
+    .role-label {
+        font-size: 1rem;
+        font-weight: bold;
+        color: #333;
+    }
+    .role-input {
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-size: 1rem;
+    }
+    .role-button {
+        background-color: #007bff;
+        color: white;
+        border: none;
+        padding: 8px 15px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 1rem;
+    }
+    .role-button:hover {
+        background-color: #0056b3;
+    }
+</style>
+
+<div class="blur-overlay"></div>
+
+<center style="margin-top: 10%;">
+{% if data['upd'] %}
+<form method="post">
+    <center style="margin-top: 10%;">
+        <h1>ROLE</h1>
+        <div class="role-container">
+            <!-- <h2 class="role-title">ROLE</h2> -->
+            <div class="role-form">
+                <label for="role_name" class="role-label">Role name:</label>
+                <input type="text" id="role_name" name="role_name" value="{{data['upd'][0]['role_name']}}" required class="role-input" placeholder="role name">
+                <input type="submit" name="update" value="Update" class="role-button">
+            </div>
+        </div>
+    
+</form>
+{% else %}
+    <form method="post">
+        <center>
+        <h1>ROLE</h1>
+        <table>
+            <tr>
+                <td>Role name:</td>
+                <td><input type="text" name="role_name" required class="form-control" placeholder="role name"></td>
+                <td><input type="submit" name="submit" value="Add" class="btn btn-primary"></td>
+            </tr>
+        </table>
+    </form>
+    <br><br><br>
+    <div class="container">
+        <div class="row">
+            {% for i in data['view'] %}
+            <div class="col-3">
+                <div class="card" style="width: 18rem;">
+                    <div class="card-body">
+                      <h5 class="card-title">Role Name</h5>
+                      <p class="card-text">{{i['role_name']}}</p>
+                      <h6 class="card-subtitle mb-2 text-body-secondary">{{i['reply']}}</h6>
+                      <p class="card-text">{{i['role_id']}}</p>
+                      <a href="?action=update&id={{i['role_id']}}" class="btn btn-primary">Update</a>
+                      <a href="?action=delete&id={{i['role_id']}}" class="btn btn-danger">Delete</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</center>
+{% endif %}
+<br><br><br><br><br><br><br><br>
+{% include 'footer.html' %}

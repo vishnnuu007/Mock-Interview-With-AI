@@ -1,0 +1,58 @@
+{% include 'user_header.html' %}
+
+<style>
+  /* Set the background image */
+  body {
+    background-image: url('/static/images\ \(1\).jpeg'); /* Replace with your image URL */
+    background-size: cover;
+    background-position: center;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh; /* Changed from height: 100vh to min-height */
+    overflow-y: auto; /* Enable vertical scrolling */
+  }
+
+  /* Create a pseudo-element for the blur effect */
+  body::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: inherit;
+    filter: blur(10px); /* Adjust the blur intensity as needed */
+    z-index: -1;
+  }
+
+  /* Ensure the content is above the blurred background */
+  .container {
+    position: relative;
+    z-index: 1;
+    background: rgba(255, 255, 255, 0.8); /* Add a semi-transparent white background for readability */
+    padding: 20px;
+    border-radius: 10px;
+    margin-top: 10%;
+    margin-bottom: 20px; /* Added margin-bottom for spacing at the bottom */
+  }
+  
+</style>
+
+<center>
+  <div class="container">
+    <div class="row">
+      {% for i in data['view'] %}
+        <div class="col-3">
+          <div class="card" style="width: 18rem;">
+            <div class="card-body">
+              <h5 class="card-title">Your Role</h5>
+              <p class="card-text">{{ i['role_name'] }}</p>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</center>
+<br><br>
+{% include 'footer.html' %}

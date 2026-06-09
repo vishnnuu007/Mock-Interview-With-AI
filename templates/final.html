@@ -1,0 +1,49 @@
+{% include 'user_header.html'%}
+
+<center>
+
+
+
+<h3 style="margin-top: 200px;">You have completed all the questions for this role</h3>
+
+You have Got {{per}} percentage for this exam <br><br>
+
+{% if emotion %}
+<h2>Emotion Detected: {{ emotion }}</h2>
+<p>Confidence Score: {{ '%.2f' | format(confidence) }}%</p>
+{% else %}
+<p>No emotion detected.</p>
+{% endif %}
+
+
+<table class="table" style="margin-top: 100px;">
+    <thead class="table-dark">
+    <tr>
+        <th>SI No</th>
+        <th>Question</th>
+        <th>Generated Answer</th>
+        <th>User Answer</th>
+        <th>Score</th>
+    </tr>
+</thead>
+    {% for i in data['view'] %}
+    <tbody>
+    <tr>
+        <td>{{loop.index}}</td>
+        <td>{{i['question_text']}}</td>
+        <td>{{i['correct_answer']}}</td>
+        <td>{{i['user_answer']}}</td>
+        <td>{{i['score']}}</td>
+    </tr>
+</tbody>
+    {% endfor %}
+</table>
+
+
+
+
+</center>
+
+<br><br><br><br><br>
+
+{% include 'footer.html'%}

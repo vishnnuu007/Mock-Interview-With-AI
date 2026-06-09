@@ -1,0 +1,92 @@
+{% include 'admin_header.html' %}
+<center>
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        overflow: hidden;
+    }
+
+    /* Background image with blur */
+    body::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: url('static/706e8c2272f678808a06897934696f20.jpg') no-repeat center center/cover;
+        filter: blur(10px); /* Apply blur effect */
+        z-index: -1; /* Push to background */
+    }
+
+    .blur-background {
+        background: rgba(255, 255, 255, 0.6); /* Slightly more opaque white for better readability */
+        backdrop-filter: blur(5px); /* Light blur for depth effect */
+        padding: 30px;
+        border-radius: 12px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        max-width: 400px;
+        width: 90%;
+        text-align: center;
+    }
+
+    .form-control {
+        width: 100%;
+        padding: 10px;
+        margin: 10px 0;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-size: 16px;
+    }
+
+    .btn-primary {
+        background-color: #007bff;
+        color: white;
+        padding: 12px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+        width: 100%;
+    }
+
+    .btn-primary:hover {
+        background-color: #0056b3;
+    }
+
+    /* Explicitly center the h1 */
+    h1 {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+</style>
+
+</center>
+
+<center>
+    <div class="blur-background">
+        <form method="post">
+            <h1 style="margin-left: -11px;">NOTIFICATION</h1>
+            <table>
+                <tr>
+                    <td>Title:</td>
+                    <td><input type="text" name="title" required class="form-control" placeholder="Enter Title"></td>
+                </tr>
+                <tr>
+                    <td>Description:</td>
+                    <td><textarea name="description" required class="form-control" placeholder="Enter Description"></textarea></td>
+                </tr>
+                <tr>
+                    <td colspan="2"><input type="submit" value="Submit" name="Submit" class="btn btn-primary"></td>
+                </tr>
+            </table>
+        
+        </form>
+    </center>
+    </div>

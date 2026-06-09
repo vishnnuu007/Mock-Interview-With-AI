@@ -1,0 +1,71 @@
+
+
+
+
+ {% include 'user_header.html' %}
+
+ <style>
+     /* Add a background image or color and apply blur */
+     body::before {
+         content: '';
+         position: fixed;
+         top: 0;
+         left: 0;
+         width: 100%;
+         height: 100%;
+         background: url('/static/images\ \(2\).jpeg') no-repeat center center/cover; /* Replace with your image or use a color */
+         filter: blur(8px); /* Adjust the blur intensity */
+         z-index: -1;
+     }
+ 
+     /* Ensure the content is above the blurred background */
+     .content {
+         position: relative;
+         z-index: 1;
+         background: rgba(255, 255, 255, 0.8); /* Semi-transparent white background for readability */
+         padding: 20px;
+         border-radius: 10px;
+         margin-top: 10%;
+     }
+ </style>
+ 
+ <center>
+     <div class="content">
+         <form action="" method="post">
+             <table>
+                 <tr>
+                     <td>
+                         <input type="text" name="complaint" required class="form-control" placeholder="complaint">
+                     </td>
+                 </tr>
+                 <tr>
+                     <td>
+                         <input type="submit" name="submit" class="btn btn-primary w-100">
+                     </td>
+                 </tr>
+             </table>
+             <br>
+         </form>
+ 
+         <br><br><br>
+         <div class="container">
+             <div class="row">
+                 {% for i in data['view'] %}
+                     <div class="col-3">
+                         <div class="card" style="width: 18rem;">
+                             <div class="card-body">
+                                 <h5 class="card-title">Your Complaint</h5>
+                                 <p class="card-text">{{ i['complaint'] }}</p>
+                                 <h6 class="card-subtitle mb-2 text-body-secondary">{{ i['reply'] }}</h6>
+                                 <p class="card-text">{{ i['date'] }}</p>
+                             </div>
+                         </div>
+                     </div>
+                 {% endfor %}
+             </div>
+         </div>
+     </div>
+ </center>
+ 
+ <br><br><br><br><br><br><br><br><br>
+ {% include 'footer.html' %}

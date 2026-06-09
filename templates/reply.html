@@ -1,0 +1,85 @@
+ {%include 'admin_header.html'%}
+
+
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reply Page</title> -->
+    <style>
+        /* Background Image */
+        body {
+            background: url('/static/5819084e975ec9798abc578c50dfc207.jpg') no-repeat center center fixed;
+            background-size: cover;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Blurred Overlay */
+        body::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: inherit;
+            filter: blur(10px);
+            z-index: -1;
+        }
+
+        /* Form Container */
+        .form-container {
+            width: 400px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.2); /* Semi-transparent */
+            border-radius: 15px;
+            backdrop-filter: blur(8px); /* Glassmorphism Effect */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+            color: #fff;
+        }
+
+        input[type="text"], input[type="submit"] {
+            width: 90%;
+            padding: 10px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 5px;
+        }
+
+        input[type="text"] {
+            background: rgba(255, 255, 255, 0.8);
+        }
+
+        input[type="submit"] {
+            background: #007bff;
+            color: white;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h1>REPLY</h1>
+        <form method="post">
+            <input type="text" name="send_reply" required placeholder="Send Reply">
+            <input type="submit" name="submit" value="Submit">
+        </form>
+    </div>
+</body>
+</html>

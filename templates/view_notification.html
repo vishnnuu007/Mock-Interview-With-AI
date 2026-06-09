@@ -1,0 +1,63 @@
+{% include 'user_header.html' %}
+
+<style>
+  body {
+    background-image: url('/static/b03df4f90386cc64c3b810054d43016e.jpg'); /* Add your background image here */
+    background-size: cover;
+    background-position: center;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh; /* Changed from height to min-height */
+    /* Removed overflow: hidden */
+  }
+
+  .blur-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background color */
+    backdrop-filter: blur(10px); /* Blur effect */
+    z-index: -1;
+  }
+
+  .container {
+    position: relative;
+    z-index: 1;
+  }
+
+  .card {
+    background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white background for cards */
+    border-radius: 10px;
+    padding: 20px;
+    margin: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+</style>
+
+<div class="blur-background"></div>
+
+<center style="margin-top: 10%;">
+  <table border="2">
+    <br><br><br>
+    <div class="container">
+      <div class="row">
+        {% for i in data['view'] %}
+          <div class="col-3">
+            <div class="card" style="width: 18rem;">
+              <div class="card-body">
+                <h5 class="card-title">View Notification</h5>
+                <p class="card-text">{{i['title']}}</p>
+                <p class="card-text">{{i['description']}}</p>
+                <p class="card-text">{{i['date_time']}}</p>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </table>
+</center>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+{% include 'footer.html' %}

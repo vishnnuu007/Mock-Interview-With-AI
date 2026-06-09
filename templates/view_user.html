@@ -1,0 +1,117 @@
+{% include 'user_header.html' %}
+
+<style>
+    /* Background image and blur effect */
+    body {
+        background-image: url('/static/706e8c2272f678808a06897934696f20.jpg'); /* Replace with your image path */
+        background-size: cover;
+        background-position: center;
+        margin: 0;
+        padding: 0;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .blur-background {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        backdrop-filter: blur(10px); /* Adjust the blur intensity */
+        z-index: -1;
+    }
+
+    .content {
+        position: relative;
+        z-index: 1;
+        background: rgba(255, 255, 255, 0.8); /* Semi-transparent white background for readability */
+        padding: 20px;
+        border-radius: 10px;
+        margin-top: 10%;
+        display: inline-block;
+        min-height: 60vh; /* Ensures content has enough space */
+        border: 2px solid #ccc; /* Added border */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Added subtle shadow */
+    }
+
+    /* Make the page scrollable if content overflows */
+    .container {
+        flex: 1;
+        overflow-y: auto;
+        padding-bottom: 50px; /* Creates space for the footer */
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    table td {
+        padding: 10px;
+        border: 1px solid #ddd;
+    }
+
+    input.form-control {
+        width: 100%;
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+
+    /* Move footer lower */
+    .footer {
+        position: relative;
+        bottom: 0;
+        width: 100%;
+        text-align: center;
+        padding: 10px;
+    }
+</style>
+
+<!-- Blur background overlay -->
+<div class="blur-background"></div>
+
+<!-- Content Container -->
+<div class="container">
+    <center>
+        <div class="content">
+            <h1>Manage Profile</h1>
+            {% if data['view'] %}
+            <form method="post">
+                <table>
+                    <tr>
+                        <td>First name</td>
+                        <td><input type="text" name="fname" value="{{data['view'][0]['fname']}}" class="form-control" placeholder="first name" required></td>
+                    </tr>
+                    <tr>
+                        <td>Last Name</td>
+                        <td><input type="text" name="lname" value="{{data['view'][0]['lname']}}" class="form-control" placeholder="last Name" required></td>
+                    </tr>
+                    <tr>
+                        <td>Place</td>
+                        <td><input type="text" name="place" value="{{data['view'][0]['place']}}" class="form-control" placeholder="place" required></td>
+                    </tr>
+                    <tr>
+                        <td>Phone</td>
+                        <td><input type="text" name="phone" value="{{data['view'][0]['phone']}}" class="form-control" placeholder="phone" pattern="[0-9]{10}" maxlength="10" required></td>
+                    </tr>
+                    <tr>
+                        <td>Email</td>
+                        <td><input type="text" name="email" value="{{data['view'][0]['email']}}" class="form-control" placeholder="email" required></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><input type="submit" name="Update" value="Update" class="btn btn-primary"></td>
+                    </tr>
+                </table>
+            </form>
+            {% endif %}
+        </div>
+    </center>
+</div>
+
+<!-- Footer -->
+<div class="footer">
+    {% include 'footer.html' %}
+</div>
