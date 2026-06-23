@@ -1,0 +1,16 @@
+__pycache__/
+.vscode/
+
+*.pyc
+*.pyo
+
+*.db
+*.sqlite3
+
+.env
+.env.*
+
+faces.pickles
+
+model_78.h5
+model_weights_78.h5
